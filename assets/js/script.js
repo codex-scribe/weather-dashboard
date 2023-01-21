@@ -8,7 +8,6 @@ $(searchButtonEl).on("click", getLocation);
 function getLocation (event) {
     event.preventDefault();
     var location = cityEl.val();
-    console.log(location);
     var locationUrl = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3`;
     fetch(locationUrl).then(function(response) {
         return response.json();}
@@ -16,8 +15,7 @@ function getLocation (event) {
         var coords = {
         lat: data[0].lat,
         lon: data[0].lon
-        }
-        console.log(coords);
+        };
         cityEl.val('');
         getWeather(coords);
         }
@@ -25,11 +23,14 @@ function getLocation (event) {
 }
 
 function getWeather(coords) {
-    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3`
+    var requestUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lon}&units=imperial&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3`
     fetch(requestUrl).then(function(response) {
         return response.json();
     }).then(function(data) {
         console.log(data);
-        
+        $('#cityName').text(`${data.city.name}`);
+        $('#cityTemp').text(`${data.list[0].main.temp}`);
+        $('#cityWind').text(`${data.list[0].wind.speed}`);
+        $('#cityHumidity').text(`${data.list[0].main.humidity}`);
     })
 }
