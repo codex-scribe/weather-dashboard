@@ -33,14 +33,25 @@ function getWeather(coords) {
     })
     .then(function (data) {
       console.log(data);
+      fiveDayEl.html('');
       $("#cityName").text(`${data.city.name}`);
       $("#cityTemp").text(`${data.list[0].main.temp}`);
       $("#cityWind").text(`${data.list[0].wind.speed}`);
       $("#cityHumidity").text(`${data.list[0].main.humidity}`);
-      var pastSearch = $("<p>");
-      pastSearch.addClass("pastsearch");
-      pastSearch.text(`${data.city.name}`);
-      pastSearchesArea.append(pastSearch);
+      var pastSearchEls = pastSearchesArea.children();
+      for (var i = 0; i < pastSearchEls.length; i++) {
+        if (i<pastSearchEls.length-1 && pastSearchEls[i].text() !== data.city.name) {
+          continue
+        } else if (i<pastSearchEls.length && pastSearchEls[i].text() == data.city.name) {
+          break
+        } else {
+          var pastSearch = $("<p>");
+          pastSearch.addClass("pastsearch");
+          pastSearch.text(`${data.city.name}`);
+          pastSearchesArea.append(pastSearch);
+        }
+      }
+      
       for (var i = 8; i < 41; i += 8) {
         console.log(i);
         var newCard = $("<div>");
