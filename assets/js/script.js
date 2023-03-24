@@ -2,8 +2,8 @@ var searchForm = $("#go");
 var cityEl = $("#city-search");
 var fiveDayEl = $("#fiveDay");
 var pastSearchesArea = $("#pastSearches");
-//var locationUrl = 'http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3'
-//var requestUrl = 'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3'
+var locationUrl = 'http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3'
+var requestUrl = 'https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid=25aec6e1a5f4bd4d4c5e2b4868c2e0e3'
 var pastSearchEls = [];
 
 $(searchForm).on("submit", function (event) {
